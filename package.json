@@ -10,5 +10,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/avrubio/hangman.git"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
   }
 }
