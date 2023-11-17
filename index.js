@@ -3,8 +3,6 @@ import prompt from 'readline-sync';
 
 import wordBank from './word-bank.js';
 
-console.log("\nWelcome to Hangman!\nPress ctrl+c to stop\n");
-console.log(wordBank[0]);
 // function to pick a random word from the word bank
 /* link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random */
 function getRandomWord() {
@@ -14,13 +12,19 @@ function getRandomWord() {
   return wordBank[randomIndex];
 }
 
-console.log(getRandomWord());
-
 // function to initialize the game play display it will render underscores for each letter in the word. This function accepts a string as a parameter.
 function initializeDisplay(word) {
-  // this will render the underscores for each letter in the word.
-  // create a display string with underscores for each letter in the word
-  //  return the display string
+  console.log("\nWelcome to Hangman!\nPress ctrl+c to stop\n");
+
+  // Creates a display string with underscores for each letter in the word
+  let display = "";
+  for (let i = 0; i < word.length; i++) {
+    // If the character is a letter, replace it with an underscore
+    display += word[i].match(/[a-zA-Z]/) ? "_" : word[i];
+  }
+
+  // Return the display string
+  return display;
 }
 
 //function to update the display that the user can see
@@ -50,7 +54,7 @@ function isGameOver(word, remainingGuesses) {
 function startGame() {
   //pick a random word
   const randomWord = getRandomWord();
-  let display = initializeDisplay();
+  let display = initializeDisplay(randomWord);
   let remainingGuesses = 6;
   let guessedLetter = [];
 
@@ -67,3 +71,4 @@ function startGame() {
     // we call our methods here
   }
 }
+startGame();
