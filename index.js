@@ -57,9 +57,9 @@ function updateGuesses(remainingGuesses, isCorrectGuess) {
 }
 
 //function to check if the game is over or not
-function isGameOver(word, remainingGuesses) {
-  //CHeck if the word is fully guessed or if remaing gusses are 0
-  //Return  true or false
+function isGameOver(display, remainingGuesses) {
+  //Check if the word/display is fully guessed or if remaining guesses are 0
+  return !display.includes("_") || remainingGuesses === 0;
 }
 
 //Main game starting loop
