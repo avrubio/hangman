@@ -85,8 +85,8 @@ function startGame() {
 
     guessedLetters.push(guessedLetter);
 
-    const isCorrectGuess = checkGuess(word, guessedLetter);
-    display = updateDisplay(word, display, guessedLetter);
+    const isCorrectGuess = checkGuess(randomWord, guessedLetter);
+    display = updateDisplay(randomWord, display, guessedLetter);
     remainingGuesses = updateGuesses(remainingGuesses, isCorrectGuess);
   }
 
