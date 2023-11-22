@@ -8,7 +8,6 @@ import wordBank from './word-bank.js';
 function getRandomWord() {
   // this will return a random word.aa
   let randomIndex = Math.floor(Math.random() * wordBank.length);
-  console.log(randomIndex);
   return wordBank[randomIndex];
 }
 
@@ -28,14 +27,23 @@ function initializeDisplay(word) {
 }
 
 //function to update the display that the user can see
-function updateDisplay(string) {
+function updateDisplay(word, display, guessedLetter) {
   //replace the underscores in the display with the correct guessed letter if it is in the word.
+  let newDisplay = "";
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === guessedLetter) {
+      newDisplay += guessedLetter;
+    } else {
+      newDisplay += display[i];
+    }
+  }
+  return newDisplay;
 }
 
 //fuction to check if the guess is correct
-function checkGuess(word, gussedLetter) {
+function checkGuess(word, guessedLetter) {
   //CHeck if the word contains the gussed letter
-  //Return true or false (Boolean)
+  word.includes(guessedLetter);
 }
 
 //function to update the remaining guesses
@@ -64,8 +72,10 @@ function startGame() {
     console.log(`Remaing guesses ${remainingGuesses}`);
     let guessedLetter = prompt.question("Please guesses a letter");
     // add logic to check if the letter was already guessed
-    if (guessedLetters.includes) {
+    if (guessedLetters.includes(guessedLetter)) {
       //if true render a message indicating that they have already guessed the letter. Do not update the count.
+      console.log("You have already guessed this letter. Try another one.");
+      continue;
     }
     // we can check the guess as well as update display
     // we call our methods here
