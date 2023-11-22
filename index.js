@@ -49,7 +49,11 @@ function checkGuess(word, guessedLetter) {
 //function to update the remaining guesses
 function updateGuesses(remainingGuesses, isCorrectGuess) {
   //Decrease remaining guesses if the guess is incorrect
+  if (!isCorrectGuess) {
+    remainingGuesses--;
+  }
   // Return the updated remaining guesses
+  return remainingGuesses;
 }
 
 //function to check if the game is over or not
