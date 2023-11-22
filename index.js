@@ -43,7 +43,7 @@ function updateDisplay(word, display, guessedLetter) {
 //fuction to check if the guess is correct
 function checkGuess(word, guessedLetter) {
   //CHeck if the word contains the gussed letter
-  word.includes(guessedLetter);
+  return word.includes(guessedLetter);
 }
 
 //function to update the remaining guesses
@@ -57,7 +57,7 @@ function updateGuesses(remainingGuesses, isCorrectGuess) {
 }
 
 //function to check if the game is over or not
-function isGameOver(display, remainingGuesses) {
+function isGameOver(word, display, remainingGuesses) {
   //Check if the word/display is fully guessed or if remaining guesses are 0
   return !display.includes("_") || remainingGuesses === 0;
 }
@@ -68,21 +68,32 @@ function startGame() {
   const randomWord = getRandomWord();
   let display = initializeDisplay(randomWord);
   let remainingGuesses = 6;
-  let guessedLetter = [];
+  let guessedLetters = [];
 
   //Repeat until the game is won or the amount of guesses is equal to zero
-  while (!isGameOver(word, display, remainingGuesses)) {
+  while (!isGameOver(randomWord, display, remainingGuesses)) {
     console.log(display);
-    console.log(`Remaing guesses ${remainingGuesses}`);
-    let guessedLetter = prompt.question("Please guesses a letter");
-    // add logic to check if the letter was already guessed
+    console.log(`Remaining guesses: ${remainingGuesses}`);
+    let guessedLetter = prompt
+      .question("Please guess a letter: ")
+      .toLowerCase();
+
     if (guessedLetters.includes(guessedLetter)) {
-      //if true render a message indicating that they have already guessed the letter. Do not update the count.
       console.log("You have already guessed this letter. Try another one.");
-      continue;
+      continue; // Skip the rest of the loop and start a new iteration
     }
-    // we can check the guess as well as update display
-    // we call our methods here
+
+    guessedLetters.push(guessedLetter);
+
+    const isCorrectGuess = checkGuess(word, guessedLetter);
+    display = updateDisplay(word, display, guessedLetter);
+    remainingGuesses = updateGuesses(remainingGuesses, isCorrectGuess);
+  }
+
+  if (remainingGuesses > 0) {
+    console.log(`Congratulations! You guessed the word: ${randomWord}`);
+  } else {
+    console.log(`Sorry, you ran out of guesses. The word was: ${randomWord}`);
   }
 }
 startGame();
