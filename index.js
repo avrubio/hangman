@@ -39,6 +39,20 @@ function updateDisplay(word, display, guessedLetter) {
   }
   return newDisplay;
 }
+// Function to build the hangman visualization based on the number of remaining guesses
+function buildHangman(remainingGuesses) {
+  const hangmanParts = [
+    "  _______\n |       |\n         |\n         |\n         |\n         |\n_________|\n",
+    "  _______\n |       |\n O       |\n         |\n         |\n         |\n_________|\n",
+    "  _______\n |       |\n O       |\n |       |\n         |\n         |\n_________|\n",
+    "  _______\n |       |\n O       |\n/|       |\n         |\n         |\n_________|\n",
+    "  _______\n |       |\n O       |\n/|\\      |\n         |\n         |\n_________|\n",
+    "  _______\n |       |\n O       |\n/|\\      |\n/        |\n         |\n_________|\n",
+    "  _______\n |       |\n O       |\n/|\\      |\n/ \\      |\n         |\n_________|\n",
+  ];
+
+  console.log(hangmanParts[6 - remainingGuesses]);
+}
 
 //fuction to check if the guess is correct
 function checkGuess(word, guessedLetter) {
@@ -73,6 +87,7 @@ function startGame() {
   //Repeat until the game is won or the amount of guesses is equal to zero
   while (!isGameOver(randomWord, display, remainingGuesses)) {
     console.log(display);
+    buildHangman(remainingGuesses); // Display the current state of the hangman
     console.log(`Remaining guesses: ${remainingGuesses}`);
     let guessedLetter = prompt
       .question("Please guess a letter: ")
