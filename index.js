@@ -5,14 +5,14 @@ import wordBank from "./word-bank.js";
 
 // function to pick a random word from the word bank
 /* link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random */
-getRandomWord = () => {
+const getRandomWord = () => {
   // this will return a random word.aa
   let randomIndex = Math.floor(Math.random() * wordBank.length);
   return wordBank[randomIndex];
 };
 
 // function to initialize the game play display it will render underscores for each letter in the word. This function accepts a string as a parameter.
-initializeDisplay = (word) => {
+const initializeDisplay = (word) => {
   console.log("\nWelcome to Hangman!\nPress ctrl+c to stop\n");
 
   // Creates a display string with underscores for each letter in the word
@@ -27,7 +27,7 @@ initializeDisplay = (word) => {
 };
 
 //function to update the display that the user can see
-updateDisplay = (word, display, guessedLetter) => {
+const updateDisplay = (word, display, guessedLetter) => {
   //replace the underscores in the display with the correct guessed letter if it is in the word.
   let newDisplay = "";
   for (let i = 0; i < word.length; i++) {
@@ -40,7 +40,7 @@ updateDisplay = (word, display, guessedLetter) => {
   return newDisplay;
 };
 // Function to build the hangman visualization based on the number of remaining guesses
-buildHangman = (remainingGuesses) => {
+const buildHangman = (remainingGuesses) => {
   const hangmanParts = [
     "  _______\n |       |\n         |\n         |\n         |\n         |\n_________|\n",
     "  _______\n |       |\n O       |\n         |\n         |\n         |\n_________|\n",
@@ -55,13 +55,13 @@ buildHangman = (remainingGuesses) => {
 };
 
 //fuction to check if the guess is correct
-checkGuess = (word, guessedLetter) => {
+const checkGuess = (word, guessedLetter) => {
   //CHeck if the word contains the gussed letter
   return word.includes(guessedLetter);
 };
 
 //function to update the remaining guesses
-updateGuesses = (remainingGuesses, isCorrectGuess) => {
+const updateGuesses = (remainingGuesses, isCorrectGuess) => {
   //Decrease remaining guesses if the guess is incorrect
   if (!isCorrectGuess) {
     remainingGuesses--;
@@ -71,13 +71,13 @@ updateGuesses = (remainingGuesses, isCorrectGuess) => {
 };
 
 //function to check if the game is over or not
-isGameOver = (word, display, remainingGuesses) => {
+const isGameOver = (word, display, remainingGuesses) => {
   //Check if the word/display is fully guessed or if remaining guesses are 0
   return !display.includes("_") || remainingGuesses === 0;
 };
 
 //Main game starting loop
-startGame = () => {
+const startGame = () => {
   //pick a random word
   const randomWord = getRandomWord();
   let display = initializeDisplay(randomWord);
